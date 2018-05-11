@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './Component/Header/Header';
-import Wizard from './Component/Wizard/Wizard'
+// import Wizard from './Component/Wizard/Wizard'
 import router from './routes'
 
 class App extends Component {

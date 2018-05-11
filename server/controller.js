@@ -7,6 +7,7 @@ module.exports={
 
     addHouse: (req,res)=>{
         let {name, address, city, state, zip, imgURL, mortgage, rent}= req.body
+        console.log(name, address, city, state, zip, imgURL, mortgage, rent )
         req.app.get('db').addHouse([name, address, city, state, zip, imgURL, mortgage, rent])
         .then(res.sendStatus(200))
         .catch(()=> res.sendStatus(500) )

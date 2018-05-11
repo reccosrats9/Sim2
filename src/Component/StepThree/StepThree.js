@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {updateThree, cancel} from '../../ducks/reducer';
 
-export default class StepThree extends Component{
+class StepThree extends Component{
 
     constructor(){
         super()
@@ -16,6 +18,12 @@ export default class StepThree extends Component{
 
     }
     
+    componentDidMount(){
+        let {mortgage, rent}= this.props
+        console.log(mortgage, rent)
+        this.setState({mortgage, rent})
+    }
+
     updateMortgage(e){
         this.setState({mortgage: e.target.value})
     }
@@ -23,21 +31,27 @@ export default class StepThree extends Component{
         this.setState({rent: e.target.value})
     }
     addHouse(e){
-        let {name, address, city, state, zip}= this.state
-        axios.post('/api/houses', {name, address, city, state, zip})
-        .then(()=> console.log('added new house'))
 
-        this.setState({
-            name: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: 0
-        })
+        let {name, address, city, state, zip, imgURL}= this.props.state
+        let {mortgage, rent}= this.state
+        console.log(this.props)
+        axios.post('/api/houses', {name, address, city, state, zip, imgURL, mortgage, rent})
+        .then(()=> console.log('added new house'))
+        
+        this.props.cancel()
+
+        // this.setState({
+        //     name: '',
+        //     address: '',
+        //     city: '',
+        //     state: '',
+        //     zip: 0
+        // })
     }
 
 
     render(){
+        let {mortgage, rent}= this.state
         return(
             <div>
                 <div> Monthly Mortgage Amount
@@ -50,7 +64,7 @@ export default class StepThree extends Component{
                 </div>             
 
             <Link to='/wizard/step2' >
-                <button>Previous Step</button>
+                <button onClick={e=>this.props.updateThree(mortgage, rent)}>Previous Step</button>
             </Link>
             <Link to = '/'>
                 < button onClick= {this.addHouse}>Complete</button>
@@ -59,3 +73,15 @@ export default class StepThree extends Component{
         )
     }
 }
+
+function mapStateToProps(state){
+    // const {mortgage, rent} =state
+    return{
+        // mortgage, rent
+        state
+    }
+
+}
+
+
+export default connect(mapStateToProps, {updateThree, cancel})(StepThree);
