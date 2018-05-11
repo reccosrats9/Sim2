@@ -7,10 +7,11 @@ import router from './routes'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className= 'App'>
         <Header />
-        {/* <Wizard /> */}
+       <div className= 'grBox'>
         {router}
+        </div>
       </div>
     );
   }

@@ -49,11 +49,12 @@ export default class StepThree extends Component{
                 value= {this.state.rent} />
                 </div>             
 
-            <Link to='/wizard/step1' >
+            <Link to='/wizard/step2' >
                 <button>Previous Step</button>
             </Link>
-                <button onClick= {this.addHouse}>Complete</button>
-
+            <Link to = '/'>
+                < button onClick= {this.addHouse}>Complete</button>
+            </Link>
             </div>
         )
     }
