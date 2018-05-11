@@ -2,20 +2,14 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-export default class StepOne extends Component{
+export default class StepTwo extends Component{
 
     constructor(){
         super()
         this.state= {
             imgURL: ''
         }
-        this.updateName= this.updateName.bind(this);
-        this.updateAddress= this.updateAddress.bind(this);
-        this.updateCity= this.updateCity.bind(this);
-        this.updateState= this.updateState.bind(this);
-        this.updateZip= this.updateZip.bind(this);
-        this.addHouse= this.addHouse.bind(this)
-
+        this.updateImg= this.updateImg.bind(this)
     }
 
     updateImg(e){
@@ -30,9 +24,12 @@ export default class StepOne extends Component{
                 value= {this.state.imgURL} />
                 </div>                
 
-                <button onClick={this.addHouse} >Complete
-                </button>
-
+            <Link to='/wizard/step1' >
+                <button>Previous Step</button>
+            </Link>
+            <Link to='/wizard/step3' >    
+                <button>Next Step</button>
+            </Link>
             </div>
         )
     }

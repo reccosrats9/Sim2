@@ -18,7 +18,6 @@ export default class StepOne extends Component{
         this.updateCity= this.updateCity.bind(this);
         this.updateState= this.updateState.bind(this);
         this.updateZip= this.updateZip.bind(this);
-        this.addHouse= this.addHouse.bind(this)
 
     }
 
@@ -40,20 +39,6 @@ export default class StepOne extends Component{
 
     updateZip(e){
         this.setState({zip: e.target.value})
-    }
-
-    addHouse(e){
-        let {name, address, city, state, zip}= this.state
-        axios.post('/api/houses', {name, address, city, state, zip})
-        .then(()=> console.log('added new house'))
-
-        this.setState({
-            name: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: 0
-        })
     }
 
     render(){
@@ -79,8 +64,9 @@ export default class StepOne extends Component{
                 <input onChange={this.updateZip}
                 value= {this.state.zip}/>
                 </div>
-                <button onClick={this.addHouse} >Next Step
-                </button>
+                <Link to='/wizard/step2' >
+                <button >Next Step</button>
+                </Link>
 
             </div>
         )

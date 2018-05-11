@@ -2,46 +2,26 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-export default class StepOne extends Component{
+export default class StepThree extends Component{
 
     constructor(){
         super()
         this.state= {
-            name: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: 0
+            mortgage: 0, 
+            rent: 0
         }
-        this.updateName= this.updateName.bind(this);
-        this.updateAddress= this.updateAddress.bind(this);
-        this.updateCity= this.updateCity.bind(this);
-        this.updateState= this.updateState.bind(this);
-        this.updateZip= this.updateZip.bind(this);
+        this.updateMortgage= this.updateMortgage.bind(this)
+        this.updateRent= this.updateRent.bind(this)
         this.addHouse= this.addHouse.bind(this)
 
     }
-
-    updateName(e){
-        this.setState({name: e.target.value})
+    
+    updateMortgage(e){
+        this.setState({mortgage: e.target.value})
     }
-
-    updateAddress(e){
-        this.setState({address: e.target.value})
+    updateRent(e){
+        this.setState({rent: e.target.value})
     }
-
-    updateCity(e){
-        this.setState({city: e.target.value})
-    }
-
-    updateState(e){
-        this.setState({state: e.target.value})
-    }
-
-    updateZip(e){
-        this.setState({zip: e.target.value})
-    }
-
     addHouse(e){
         let {name, address, city, state, zip}= this.state
         axios.post('/api/houses', {name, address, city, state, zip})
@@ -56,35 +36,23 @@ export default class StepOne extends Component{
         })
     }
 
+
     render(){
         return(
             <div>
-                <div>Wizard</div>
-                <Link to='/' >
-                <button> Cancel</button> 
-                </Link>
-                <div> Property Name
-                <input onChange={this.updateName}
-                value= {this.state.name} />
-                </div>                
-                <div> Address
-                <input onChange={this.updateAddress}
-                value= {this.state.address}/>
-                </div>
-                <div> City
-                <input onChange={this.updateCity}
-                value= {this.state.city}/>
-                </div>
-                <div> State
-                <input onChange={this.updateState}
-                value= {this.state.state}/>
-                </div>
-                <div>Zip
-                <input onChange={this.updateZip}
-                value= {this.state.zip}/>
-                </div>
-                <button onClick={this.addHouse} >Complete
-                </button>
+                <div> Monthly Mortgage Amount
+                <input onChange={this.updateMortgage}
+                value= {this.state.mortgage} />
+                </div> 
+                <div> Desired Monthly Rent    
+                <input onChange={this.updateRent}
+                value= {this.state.rent} />
+                </div>             
+
+            <Link to='/wizard/step1' >
+                <button>Previous Step</button>
+            </Link>
+                <button onClick= {this.addHouse}>Complete</button>
 
             </div>
         )
