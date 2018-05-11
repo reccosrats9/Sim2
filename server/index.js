@@ -1,4 +1,5 @@
 const express= require('express');
+const serve= require('express-static')
 const bodyParser= require('body-parser');
 const controller= require('./controller');
 const massive= require('massive')
@@ -16,5 +17,7 @@ massive(process.env.CONNECTION_STRING).then(dbInstance=>{
 app.get('/api/houses', controller.getHouses)
 app.post('/api/houses', controller.addHouse)
 app.delete('/api/houses/:id', controller.deleteHouse)
+
+app.use( express.static( `${__dirname}/build` ) );
 
 app.listen(port, ()=>console.log(`Rockin' on port ${port} 🎸`))
